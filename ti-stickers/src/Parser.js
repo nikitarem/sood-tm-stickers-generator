@@ -78,10 +78,8 @@ export function parseExcelFile(file) {
           return;
         }
 
-        // Читаем файл как ArrayBuffer
         const data = new Uint8Array(e.target.result);
 
-        // Читаем workbook с опцией type: 'array'
         const workbook = XLSX.read(data, { type: 'array' });
 
         if (!workbook.SheetNames.length) {
@@ -92,7 +90,6 @@ export function parseExcelFile(file) {
         const firstSheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[firstSheetName];
 
-        // ВАЖНО: raw: false для корректного форматирования текста (UTF-8)
         const rows = XLSX.utils.sheet_to_json(worksheet, { header: 1, raw: false });
 
         if (!rows.length) {
