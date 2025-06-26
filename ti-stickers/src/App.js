@@ -21,7 +21,6 @@ function App() {
       return;
     }
 
-    // Проверяем расширение файла
     if (!/\.(xlsx|xls)$/i.test(selectedFile.name)) {
       setError('Пожалуйста, загрузите файл в формате .xlsx или .xls');
       setFileName('');
