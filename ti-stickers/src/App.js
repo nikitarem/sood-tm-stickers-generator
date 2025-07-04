@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { parseExcelFile } from './Parser';
 import { generatePdf } from './PdfConverter';
 import Equipment from './Equipment';
+import './App.css'
 
 function App() {
   const [fileName, setFileName] = useState('');
@@ -70,25 +71,8 @@ function App() {
 
   return (
     <>
-      <style>{`
-        body { font-family: Arial, sans-serif; background: #f7f7f7; margin: 0; }
-        .container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 10px #0001; padding: 30px; }
-        h2 { margin-top: 0; }
-        .desc { color: #555; margin-bottom: 20px; }
-        .file-label { display: block; margin-bottom: 10px; font-weight: bold; }
-        #fileName { font-size: 0.95em; color: #007bff; margin-bottom: 10px; }
-        #preview { margin-top: 20px; background: #f2f2f2; border-radius: 6px; padding: 10px; font-size: 0.96em; white-space: pre-wrap; }
-        #error { color: #b00; margin-top: 10px; }
-        .loading { color: #007bff; margin-top: 10px; }
-        button { background: #007bff; color: #fff; border: none; padding: 10px 20px; border-radius: 5px; font-size: 1em; cursor: pointer; margin-right: 10px; }
-        button:disabled { background: #aaa; cursor: not-allowed; }
-        @media (max-width: 600px) {
-          .container { padding: 10px; }
-        }
-      `}</style>
-
       <div className="container">
-        <h2>Конвертер Excel в PDF (3 × 8)</h2>
+        <h2>Конвертер Excel в PDF (3 × 7)</h2>
         <div className="desc">
           Загрузите Excel-файл (.xlsx или .xls).<br />
           Вся проверка формата и заголовков выполняется при конвертации.
