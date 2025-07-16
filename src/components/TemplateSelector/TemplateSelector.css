@@ -1,0 +1,24 @@
+/* src/components/TemplateSelector/TemplateSelector.css */
+.template-selector {
+    margin-bottom: 20px;
+}
+
+.template-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+.template-select {
+    width: 100%;
+    padding: 8px 12px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: white;
+}
+
+.template-select:focus {
+    border-color: #007bff;
+    outline: none;
+}

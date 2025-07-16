@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { parseExcelFile } from '../../services/Parser';
 import { generatePdf } from '../../services/PdfConverter';
+import { TemplateSelector } from '../TemplateSelector/TemplateSelector';
+import { STICKER_TEMPLATES, DEFAULT_TEMPLATE } from '../../config/templates';
 import Equipment from '../../models/Equipment';
 import './App.css'
 
@@ -10,6 +12,7 @@ function App() {
   const [error, setError] = useState('');
   const [equipments, setEquipments] = useState([]);
   const [file, setFile] = useState(null);
+  const [selectedTemplate, setSelectedTemplate] = useState(DEFAULT_TEMPLATE); 
 
   const handleFileChange = (e) => {
     setError('');
@@ -56,26 +59,45 @@ function App() {
     }
   };
 
+  const calculatePages = () => {
+    if (!equipments.length || !selectedTemplate) return 0;
+    const template = STICKER_TEMPLATES[selectedTemplate];
+    const stickersPerPage = template.cols * template.rows;
+    return Math.ceil(equipments.length / stickersPerPage);
+  };
+
   const handleDownloadPdf = () => {
     if (!equipments || equipments.length === 0) {
       setError('Нет данных для генерации PDF');
       return;
     }
     try {
-      generatePdf(equipments, 'equipment_report.pdf');
+      const template = STICKER_TEMPLATES[selectedTemplate];
+      generatePdf(equipments, template, 'equipment_report.pdf');
     } catch (err) {
       setError('Ошибка при генерации PDF: ' + err.toString());
     }
   };
 
+  const currentTemplate = STICKER_TEMPLATES[selectedTemplate];
+  const pagesCount = calculatePages();
+  const stickersPerPage = currentTemplate.cols * currentTemplate.rows;
+
   return (
     <>
       <div className="container">
-        <h2>Конвертер Excel в PDF (3 × 7)</h2>
+        <h2>Конвертер Excel в PDF ({currentTemplate.name})</h2>
         <div className="desc">
           Загрузите Excel-файл (.xlsx или .xls).<br />
-          Вся проверка формата и заголовков выполняется при конвертации.
+          Шаблон: {stickersPerPage} наклеек на лист.<br />
+          Лист размечен строго под данный формат.
         </div>
+        
+        <TemplateSelector 
+          selectedTemplate={selectedTemplate}
+          onTemplateChange={setSelectedTemplate}
+        />
+
         <label className="file-label" htmlFor="excelFile">
           Выберите Excel-файл:
         </label>
@@ -91,7 +113,9 @@ function App() {
         {error && <div id="error">{error}</div>}
         {equipments.length > 0 && (
           <div id="preview">
-            <b>Данные успешно загружены. Кол-во записей: {equipments.length}</b>
+            <b>Данные успешно загружены. Кол-во записей: {equipments.length}</b><br />
+            <span>Потребуется листов: {pagesCount}</span><br />
+            <span>Наклеек на последнем листе: {equipments.length % stickersPerPage || stickersPerPage}</span>
           </div>
         )}
       </div>
