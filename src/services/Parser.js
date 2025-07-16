@@ -1,5 +1,5 @@
 import * as XLSX from 'xlsx';
-import Equipment from './Equipment';
+import Equipment from '../models/Equipment';
 
 const monthMap = {
   январь: 0,

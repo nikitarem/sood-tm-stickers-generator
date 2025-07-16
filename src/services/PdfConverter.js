@@ -1,7 +1,7 @@
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
-import Equipment from './Equipment';
-import './Roboto-Black-normal';
+import Equipment from '../models/Equipment';
+import '../assets/fonts/Roboto-Black-normal';
 
 export function generatePdf(equipments, fileName = 'report.pdf') {
   const doc = new jsPDF({

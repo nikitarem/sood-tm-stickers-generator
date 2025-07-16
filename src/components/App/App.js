@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { parseExcelFile } from './Parser';
-import { generatePdf } from './PdfConverter';
-import Equipment from './Equipment';
+import { parseExcelFile } from '../../services/Parser';
+import { generatePdf } from '../../services/PdfConverter';
+import Equipment from '../../models/Equipment';
 import './App.css'
 
 function App() {
