@@ -12,7 +12,8 @@ function App() {
   const [error, setError] = useState('');
   const [equipments, setEquipments] = useState([]);
   const [file, setFile] = useState(null);
-  const [selectedTemplate, setSelectedTemplate] = useState(DEFAULT_TEMPLATE); 
+  const [selectedTemplate, setSelectedTemplate] = useState(DEFAULT_TEMPLATE);
+  const [maxNameLength, setMaxNameLength] = useState(100);
 
   const handleFileChange = (e) => {
     setError('');
@@ -43,7 +44,7 @@ function App() {
     setEquipments([]);
 
     try {
-      const parsedEquipments = await parseExcelFile(file);
+      const parsedEquipments = await parseExcelFile(file, maxNameLength);
 
       if (!parsedEquipments || parsedEquipments.length === 0) {
         setError('Файл пустой или не содержит данных.');
@@ -89,14 +90,28 @@ function App() {
         <h2>Конвертер Excel в PDF ({currentTemplate.name})</h2>
         <div className="desc">
           Загрузите Excel-файл (.xlsx или .xls).<br />
-          Шаблон: {stickersPerPage} наклеек на лист.<br />
-          Лист размечен строго под данный формат.
+          Шаблон: {stickersPerPage} текстовых наклеек на лист (без рамок).<br />
+          Наименование может переноситься на несколько строк.
         </div>
         
         <TemplateSelector 
           selectedTemplate={selectedTemplate}
           onTemplateChange={setSelectedTemplate}
         />
+
+        <div className="name-length-setting">
+          <label className="file-label">
+            Максимальная длина наименования: 
+            <input 
+              type="number" 
+              min="50" 
+              max="500" 
+              value={maxNameLength}
+              onChange={(e) => setMaxNameLength(parseInt(e.target.value) || 100)}
+              style={{ width: '80px', marginLeft: '10px' }}
+            /> символов
+          </label>
+        </div>
 
         <label className="file-label" htmlFor="excelFile">
           Выберите Excel-файл:

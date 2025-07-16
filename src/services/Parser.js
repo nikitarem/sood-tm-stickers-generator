@@ -62,7 +62,7 @@ const requiredHeaders = [
   'Год сейчас',
 ];
 
-export function parseExcelFile(file) {
+export function parseExcelFile(file, maxNameLength = 100) {
   return new Promise((resolve, reject) => {
     if (!(file instanceof File)) {
       reject(new Error('Передан не файл.'));
@@ -124,6 +124,12 @@ export function parseExcelFile(file) {
           if (!row || row.length < 7) continue;
 
           const name = row[0] || '';
+          
+          // Ограничиваем название до 100 символов
+          if (name.length > 100) {
+            name = name.substring(0, 100);
+          }
+
           const inventoryNumber = row[1] || '';
           const maintenancePeriod = row[2] || '';
           const monthStr = row[3] || '';
@@ -142,7 +148,8 @@ export function parseExcelFile(file) {
             maintenancePeriod,
             maintenanceDone,
             maintenanceNext,
-            engineer
+            engineer,
+            maxNameLength
           );
 
           equipments.push(equipment);

@@ -5,9 +5,10 @@ class Equipment {
     maintenancePeriod,
     maintenanceDone,
     maintenanceNext,
-    engineer
+    engineer,
+    maxLength = 100
   ) {
-    this.name = name;
+    this.name = this.truncateName(name, maxLength);
     this.inventoryNumber = inventoryNumber;
     this.maintenancePeriod = maintenancePeriod;
     this.maintenanceDone = maintenanceDone;
@@ -15,9 +16,14 @@ class Equipment {
     this.engineer = engineer;
   }
 
+  truncateName(name, maxLength) {
+    if (!name) return '';
+    return name.length > maxLength ? name.substring(0, maxLength) : name;
+  }
+
   toString() {
-    return `Наименование оборудования: ${this.name}
-Инвентарный номер: ${this.inventoryNumber}
+    return `Наименование: ${this.name}
+Инв. №: ${this.inventoryNumber}
 Периодичность ТО: ${this.maintenancePeriod}
 Проведено ТО: ${this.maintenanceDone}
 Следующее ТО: ${this.maintenanceNext}

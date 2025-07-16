@@ -74,3 +74,13 @@ button:disabled {
     padding: 10px;
   }
 }
+
+.name-length-setting {
+  margin-bottom: 20px;
+}
+
+.name-length-setting input {
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
