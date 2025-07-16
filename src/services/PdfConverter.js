@@ -92,7 +92,7 @@ function drawPage(doc, equipments, template, pageStart, layout) {
       const equipmentIndex = pageStart + row * cols + col;
       const equipment = equipmentIndex < equipments.length ? equipments[equipmentIndex] : null;
       
-      const x = PDF_SETTINGS.MARGIN + col * (colWidth + PDF_SETTINGS.GAP);
+      const x = PDF_SETTINGS.MARGIN + PDF_SETTINGS.LEFT_OFFSET + col * (colWidth + PDF_SETTINGS.GAP);
       const y = PDF_SETTINGS.MARGIN + row * (rowHeight + PDF_SETTINGS.GAP);
       
       drawEquipmentText(doc, equipment, x, y, colWidth, rowHeight);

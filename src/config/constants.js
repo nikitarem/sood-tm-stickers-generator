@@ -12,10 +12,11 @@ export const FILE_CONSTRAINTS = {
 
 // PDF настройки
 export const PDF_SETTINGS = {
-  FONT_SIZE: 5.7,
+  FONT_SIZE: 7,
   LINE_HEIGHT_OFFSET: 2,
   MARGIN: 20,
   GAP: 15,
+  LEFT_OFFSET: 5,
   TEXT_PADDING: 5,
   TEXT_MARGIN: 10,
   UNIT: 'pt',
