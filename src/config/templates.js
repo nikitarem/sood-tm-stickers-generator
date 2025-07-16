@@ -1,4 +1,18 @@
-// src/config/templates.js
+/**
+ * Конфигурация шаблонов стикеров
+ * 
+ * @typedef {Object} StickerTemplate
+ * @property {number} cols - Количество колонок на странице
+ * @property {number} rows - Количество строк на странице
+ * @property {string} name - Название шаблона
+ * @property {string} description - Описание шаблона
+ */
+
+/**
+ * Доступные шаблоны стикеров
+ * 
+ * @type {Object.<string, StickerTemplate>}
+ */
 export const STICKER_TEMPLATES = {
     '3x8': {
         cols: 3,
@@ -26,4 +40,9 @@ export const STICKER_TEMPLATES = {
     }
 };
 
+/**
+ * Шаблон по умолчанию
+ * 
+ * @type {string}
+ */
 export const DEFAULT_TEMPLATE = '3x8';

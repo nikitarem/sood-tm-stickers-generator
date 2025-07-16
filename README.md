@@ -1,70 +1,105 @@
-# Getting Started with Create React App
+# Генератор стикеров для технического обслуживания оборудования
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+React-приложение для преобразования данных об оборудовании из Excel файлов в PDF со стикерами для маркировки.
 
-## Available Scripts
+## Функциональность
 
-In the project directory, you can run:
+- Загрузка Excel файлов (.xlsx, .xls) с данными об оборудовании
+- Парсинг информации о техническом обслуживании
+- Генерация PDF файлов со стикерами
+- Поддержка различных шаблонов размещения стикеров
+- Настройка максимальной длины наименований
 
-### `npm start`
+## Быстрый старт
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+# Установка зависимостей
+npm install
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Запуск в режиме разработки
+npm start
 
-### `npm test`
+# Сборка для продакшена
+npm run build
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Приложение откроется по адресу [http://localhost:3000](http://localhost:3000)
 
-### `npm run build`
+## Структура проекта
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+src/
+├── components/          # React компоненты
+│   ├── App/            # Основной компонент приложения
+│   └── TemplateSelector/ # Селектор шаблонов стикеров
+├── config/             # Конфигурационные файлы
+│   ├── constants.js    # Константы приложения
+│   └── templates.js    # Шаблоны стикеров
+├── models/             # Модели данных
+│   └── Equipment.js    # Модель оборудования
+├── services/           # Бизнес-логика
+│   ├── Parser.js       # Парсинг Excel файлов
+│   └── PdfConverter.js # Генерация PDF
+└── assets/             # Ресурсы (шрифты, стили)
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Формат входных данных
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Excel файл должен содержать следующие колонки:
+1. **Наименование оборудования** - название оборудования
+2. **Инвентарный номер** - уникальный номер
+3. **Периодичность ТО** - период обслуживания (например, "12 месяцев")
+4. **График ТО** - месяц проведения ТО
+5. **Год сейчас** - текущий год
+6. *(пропуск)* 
+7. **Инженер ОЭиРМО** - ответственный инженер
 
-### `npm run eject`
+## Настройка и доработка
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Добавление новых шаблонов стикеров
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Новые шаблоны добавляются в `src/config/templates.js`:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```javascript
+export const STICKER_TEMPLATES = {
+  'новый_шаблон': {
+    cols: 2,              // количество колонок
+    rows: 5,              // количество строк
+    name: 'Название',     // отображаемое название
+    description: 'Описание шаблона'
+  }
+};
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Изменение констант
 
-## Learn More
+Все настройки приложения находятся в `src/config/constants.js`:
+- `FILE_CONSTRAINTS` - ограничения файлов
+- `PDF_SETTINGS` - настройки PDF генерации
+- `ERROR_MESSAGES` - тексты ошибок
+- `UI_TEXTS` - тексты интерфейса
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Модификация формата стикера
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Шаблон стикера настраивается в методе `toString()` класса `Equipment` в `src/models/Equipment.js`.
 
-### Code Splitting
+### Настройка PDF параметров
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Параметры генерации PDF (шрифты, отступы, размеры) находятся в `PDF_SETTINGS` в файле констант.
 
-### Analyzing the Bundle Size
+## Технические детали
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **React** 19.1.0 - UI фреймворк
+- **jsPDF** - генерация PDF файлов  
+- **xlsx** - парсинг Excel файлов
+- **JSDoc** - документация кода
 
-### Making a Progressive Web App
+Код покрыт JSDoc комментариями для удобства навигации и понимания логики работы.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Возможные доработки
 
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Добавление предпросмотра стикеров перед генерацией
+- Поддержка пользовательских шаблонов стикеров
+- Валидация данных Excel с подробными ошибками
+- Возможность редактирования данных перед генерацией PDF
+- Экспорт в другие форматы (Word, изображения)

@@ -2,6 +2,14 @@ import React from 'react';
 import { STICKER_TEMPLATES } from '../../config/templates';
 import './TemplateSelector.css';
 
+/**
+ * Компонент для выбора шаблона наклеек
+ * 
+ * @param {Object} props - Свойства компонента
+ * @param {string} props.selectedTemplate - Выбранный шаблон
+ * @param {Function} props.onTemplateChange - Функция обратного вызова при изменении шаблона
+ * @returns {JSX.Element} JSX элемент селектора шаблонов
+ */
 export function TemplateSelector({ selectedTemplate, onTemplateChange }) {
     return (
         <div className="template-selector">
