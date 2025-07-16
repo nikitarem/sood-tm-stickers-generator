@@ -1,7 +1,7 @@
 /**
  * Точка входа в приложение генератора стикеров для технического обслуживания оборудования
  * 
- * @author Student Project (Refactored)
+ * @author Denis (Refactored)
  * @version 1.0.0
  */
 
