@@ -20,7 +20,7 @@ export const PDF_SETTINGS = {
   TEXT_MARGIN: 10,
   UNIT: 'pt',
   FORMAT: 'a4',
-  FONT_FAMILY: 'Roboto-Black',
+  FONT_FAMILY: 'PT_Sans-Web-Regular',
   FONT_STYLE: 'normal',
   DEFAULT_FILENAME: 'equipment_report.pdf'
 };

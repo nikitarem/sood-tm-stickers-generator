@@ -1,6 +1,6 @@
 import jsPDF from 'jspdf';
 import Equipment from '../models/Equipment';
-import '../assets/fonts/Roboto-Black-normal';
+import '../assets/fonts/PT_Sans-Web-Regular-normal';
 import { PDF_SETTINGS } from '../config';
 
 /**
